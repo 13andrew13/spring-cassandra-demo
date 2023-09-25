@@ -1,0 +1,22 @@
+version: 2.20.2
+networks:
+  cassandra-network:
+    name: cassandra-network
+    
+services: 
+  cassandra-1:
+    image: 'cassandra:latest'
+    networks:
+      - cassandra-network
+    environment:
+      CASS_USERNAME: cassandra
+      CASS_PASSWORD: cassandra
+    ports:
+      - "9042:9042"
+        
+#  cassandra-2:
+#    image: 'cassandra:latest'
+#    networks:
+#      - cassandra-network
+#    environment:
+#      CASSANDRA_SEEDS: cassandra-1
