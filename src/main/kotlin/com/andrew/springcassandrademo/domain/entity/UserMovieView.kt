@@ -13,5 +13,8 @@ data class UserMovieView(
     val movieId: String,
     @Column("moviename")
     val movieName: String,
-
+    @Column("moviegenre")
+    val movieGenre: String,
+    @Column("username")
+    val userName: String,
 )
