@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.cache.RedisCacheConfiguration
 import org.springframework.data.redis.cache.RedisCacheManager.RedisCacheManagerBuilder
+import org.springframework.data.redis.cache.RedisCacheWriter
+import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair
 import java.time.Duration
@@ -18,13 +20,15 @@ class Config {
     fun objectMapper(): ObjectMapper {
         val mapper = ObjectMapper()
         mapper.findAndRegisterModules()
-        return mapper;
+        return mapper
     }
 
+
     @Bean
-    fun redisCacheManagerBuilderCustomizer(): RedisCacheManagerBuilderCustomizer {
+    fun redisCacheManagerBuilderCustomizer(redisConnectionFactory: RedisConnectionFactory): RedisCacheManagerBuilderCustomizer {
         return RedisCacheManagerBuilderCustomizer { builder: RedisCacheManagerBuilder ->
             builder
+                .cacheWriter(RedisCacheWriter.lockingRedisCacheWriter(redisConnectionFactory))
                 .withCacheConfiguration(
                     "user",
                     RedisCacheConfiguration.defaultCacheConfig()

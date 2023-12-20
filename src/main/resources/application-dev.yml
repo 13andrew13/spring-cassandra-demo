@@ -1,0 +1,15 @@
+spring:
+  cassandra:
+    password: cassandra
+    username: cassandra
+    keyspace-name: sample
+    local-datacenter: datacenter1
+    contact-points: 127.0.0.1
+    port: 9042
+    schema-action: create_if_not_exists
+  data:
+    redis:
+      host: localhost
+      port: 6379
+server:
+  port: 8090
