@@ -14,7 +14,7 @@ class MockExternalUserClient() : ExternalUserClient {
     @Cacheable(value = ["user"])
     override fun findUserById(userId: String): UserResponse? {
         logger.info { "Get user by userid: $userId" }
-        Thread.sleep(1000)
+
         return when (userId) {
             "1" -> UserResponse("1", "John Doe")
             "2" -> UserResponse("2", "Jack Doe")

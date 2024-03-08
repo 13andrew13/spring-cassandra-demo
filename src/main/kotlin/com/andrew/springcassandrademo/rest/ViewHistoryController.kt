@@ -28,4 +28,9 @@ class ViewHistoryController(
     fun clearViewHistory(userId: String) {
         viewHistoryService.clearUserViewHistory(userId)
     }
+
+    @GetMapping("/user/movie")
+    fun getVievedMovieByUserAndPhrase(userId: String, movieNamePhrase: String): List<UserMovieView> {
+        return viewHistoryService.findUserViewedFilmsByPhrase(userId, movieNamePhrase)
+    }
 }

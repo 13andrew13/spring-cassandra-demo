@@ -39,6 +39,10 @@ class ViewHistoryService(
     fun clearUserViewHistory(userId: String) {
         userMovieViewRepository.deleteAllByUserId(userId)
     }
+    
+    fun findUserViewedFilmsByPhrase(userId: String, movieNamePhrase: String): List<UserMovieView> {
+        return userMovieViewRepository.findUserMovieViewsByUserIdAndMovieNameContains(userId, movieNamePhrase)
+    }
 
 
 }
